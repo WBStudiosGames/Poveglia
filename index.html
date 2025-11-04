@@ -243,6 +243,28 @@
         .features {
             padding: 100px 0;
             background-color: var(--secondary);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .features-video-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            object-fit: cover;
+        }
+
+        .features-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.9));
+            z-index: -1;
         }
 
         .section-title {
@@ -273,7 +295,7 @@
         }
 
         .feature-card {
-            background-color: var(--card-bg);
+            background-color: rgba(26, 26, 26, 0.8);
             border-radius: 2px;
             padding: 40px 30px;
             text-align: center;
@@ -281,11 +303,13 @@
             border: 1px solid var(--border);
             position: relative;
             overflow: hidden;
+            backdrop-filter: blur(5px);
         }
 
         .feature-card:hover {
             transform: translateY(-5px);
             border-color: var(--primary);
+            background-color: rgba(26, 26, 26, 0.9);
         }
 
         .feature-icon {
@@ -311,6 +335,28 @@
         .about {
             padding: 100px 0;
             background-color: var(--background);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .about-video-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            object-fit: cover;
+        }
+
+        .about-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.9));
+            z-index: -1;
         }
 
         .about-content {
@@ -458,6 +504,28 @@
             padding: 100px 0;
             background-color: var(--secondary);
             text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .buy-now-video-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            object-fit: cover;
+        }
+
+        .buy-now-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.9));
+            z-index: -1;
         }
 
         .buy-options {
@@ -469,7 +537,7 @@
         }
 
         .buy-option {
-            background-color: var(--card-bg);
+            background-color: rgba(26, 26, 26, 0.8);
             border-radius: 2px;
             padding: 40px 30px;
             width: 300px;
@@ -477,11 +545,13 @@
             transition: all 0.3s;
             position: relative;
             overflow: hidden;
+            backdrop-filter: blur(5px);
         }
 
         .buy-option:hover {
             transform: translateY(-5px);
             border-color: var(--primary);
+            background-color: rgba(26, 26, 26, 0.9);
         }
 
         .buy-option h3 {
@@ -727,6 +797,10 @@
 
     <!-- Features Section -->
     <section id="features" class="features">
+        <!-- Video de fondo para Características -->
+        <iframe class="features-video-bg" src="https://www.youtube.com/embed/2QQZ_TY8ZK0?autoplay=1&mute=1&loop=1&playlist=2QQZ_TY8ZK0&controls=0&modestbranding=1&rel=0&disablekb=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        <div class="features-overlay"></div>
+        
         <div class="container">
             <div class="section-title">
                 <h2>Características Principales</h2>
@@ -760,6 +834,10 @@
 
     <!-- About Section -->
     <section id="about" class="about">
+        <!-- Video de fondo para Historia -->
+        <iframe class="about-video-bg" src="https://www.youtube.com/embed/lDRssWwoYZY?autoplay=1&mute=1&loop=1&playlist=lDRssWwoYZY&controls=0&modestbranding=1&rel=0&disablekb=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        <div class="about-overlay"></div>
+        
         <div class="container">
             <div class="about-content">
                 <div class="about-text">
@@ -879,6 +957,10 @@
 
     <!-- Buy Now Section -->
     <section id="buy-now" class="buy-now">
+        <!-- Video de fondo para Comprar Ahora -->
+        <iframe class="buy-now-video-bg" src="https://www.youtube.com/embed/ObcnfR13vlE?autoplay=1&mute=1&loop=1&playlist=ObcnfR13vlE&controls=0&modestbranding=1&rel=0&disablekb=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        <div class="buy-now-overlay"></div>
+        
         <div class="container">
             <div class="section-title">
                 <h2>Comprar Ahora</h2>
@@ -995,5 +1077,3 @@
     </script>
 </body>
 </html>
-
-

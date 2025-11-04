@@ -411,29 +411,30 @@
             background-color: var(--secondary);
         }
 
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 20px;
+        .gallery-container {
+            position: relative;
+            max-width: 1000px;
+            margin: 0 auto;
+            overflow: hidden;
+            border-radius: 2px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .gallery-carousel {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
         }
 
         .gallery-item {
+            min-width: 100%;
             position: relative;
-            border-radius: 2px;
-            overflow: hidden;
-            height: 250px;
-            cursor: pointer;
+            height: 500px;
         }
 
         .gallery-item img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: transform 0.5s;
-        }
-
-        .gallery-item:hover img {
-            transform: scale(1.05);
         }
 
         .gallery-overlay {
@@ -441,14 +442,62 @@
             bottom: 0;
             left: 0;
             width: 100%;
-            padding: 20px;
+            padding: 30px;
             background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
-            opacity: 0;
-            transition: opacity 0.3s;
+            color: white;
         }
 
-        .gallery-item:hover .gallery-overlay {
-            opacity: 1;
+        .gallery-overlay p {
+            font-size: 1.2rem;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .gallery-controls {
+            display: flex;
+            justify-content: center;
+            margin-top: 30px;
+            gap: 15px;
+        }
+
+        .gallery-btn {
+            background-color: rgba(26, 26, 26, 0.7);
+            color: var(--text);
+            border: 1px solid var(--border);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 18px;
+        }
+
+        .gallery-btn:hover {
+            background-color: var(--primary);
+            border-color: var(--primary);
+        }
+
+        .gallery-indicators {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+            gap: 10px;
+        }
+
+        .indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: var(--text-muted);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .indicator.active {
+            background-color: var(--primary);
+            transform: scale(1.2);
         }
 
         /* Video Gallery Section */
@@ -719,6 +768,10 @@
             .video-grid {
                 grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
             }
+
+            .gallery-item {
+                height: 400px;
+            }
         }
 
         @media (max-width: 768px) {
@@ -753,6 +806,10 @@
             
             .video-grid {
                 grid-template-columns: 1fr;
+            }
+
+            .gallery-item {
+                height: 300px;
             }
         }
     </style>
@@ -871,30 +928,82 @@
                 <h2>Galería de Imágenes</h2>
                 <p>Echa un vistazo a los horrores que te esperan en la isla de Poveglia</p>
             </div>
-            <div class="gallery-grid">
-                <div class="gallery-item">
-                    <img src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/4037640/0b5c7ef9b7e397e6f58c7eabe5cb49a59b730937/ss_0b5c7ef9b7e397e6f58c7eabe5cb49a59b730937.1920x1080.jpg?t=1760630662" alt="Poveglia Screenshot 1" width="352" height="250" />
-                    <div class="gallery-overlay">
-                        <p>Explora el hospital abandonado</p>
+            <div class="gallery-container">
+                <div class="gallery-carousel">
+                    <!-- Imagen 1 -->
+                    <div class="gallery-item">
+                        <img src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/4037640/0b5c7ef9b7e397e6f58c7eabe5cb49a59b730937/ss_0b5c7ef9b7e397e6f58c7eabe5cb49a59b730937.1920x1080.jpg?t=1760630662" alt="Poveglia Screenshot 1" />
+                        <div class="gallery-overlay">
+                            <p>Explora el hospital abandonado</p>
+                        </div>
+                    </div>
+                    <!-- Imagen 2 -->
+                    <div class="gallery-item">
+                        <img src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/4037640/1f71433b5f52a2e8c9f40de572115640d891ddc1/ss_1f71433b5f52a2e8c9f40de572115640d891ddc1.1920x1080.jpg?t=1760630662" alt="Poveglia Screenshot 2" />
+                        <div class="gallery-overlay">
+                            <p>Encuentros sobrenaturales</p>
+                        </div>
+                    </div>
+                    <!-- Imagen 3 -->
+                    <div class="gallery-item">
+                        <img src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/4037640/5ae90c77c8b0d97a7b10a37fc5ddd8f388cbdcbd/ss_5ae90c77c8b0d97a7b10a37fc5ddd8f388cbdcbd.1920x1080.jpg?t=1760630662" alt="Poveglia Screenshot 3" />
+                        <div class="gallery-overlay">
+                            <p>Atmósfera opresiva</p>
+                        </div>
+                    </div>
+                    <!-- Imagen 4 -->
+                    <div class="gallery-item">
+                        <img src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/4037640/b1bbb3c93734e58fd51f4657c5701632e87c7ab2/ss_b1bbb3c93734e58fd51f4657c5701632e87c7ab2.1920x1080.jpg?t=1760630662" alt="Poveglia Screenshot 4" />
+                        <div class="gallery-overlay">
+                            <p>Resuelve enigmas</p>
+                        </div>
+                    </div>
+                    <!-- Imagen 5 -->
+                    <div class="gallery-item">
+                        <img src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2260450/cb6e38dadecd8584d5d3076fdfb012dff85b6abb/ss_cb6e38dadecd8584d5d3076fdfb012dff85b6abb.1920x1080.jpg?t=1760633487" alt="Poveglia Screenshot 5" />
+                        <div class="gallery-overlay">
+                            <p>Descubre los secretos de la isla</p>
+                        </div>
+                    </div>
+                    <!-- Imagen 6 -->
+                    <div class="gallery-item">
+                        <img src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2260450/ss_954745d4da8b3aa4ea178601f951696acd5d5a75.1920x1080.jpg?t=1760633487" alt="Poveglia Screenshot 6" />
+                        <div class="gallery-overlay">
+                            <p>Enfrenta tus miedos</p>
+                        </div>
+                    </div>
+                    <!-- Imagen 7 -->
+                    <div class="gallery-item">
+                        <img src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2260450/7aa4b45345666a9c9d6baf18af13335af4f931b0/ss_7aa4b45345666a9c9d6baf18af13335af4f931b0.1920x1080.jpg?t=1760633487" alt="Poveglia Screenshot 7" />
+                        <div class="gallery-overlay">
+                            <p>Explora lugares abandonados</p>
+                        </div>
+                    </div>
+                    <!-- Imagen 8 -->
+                    <div class="gallery-item">
+                        <img src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2260450/7b3b6cb977fc70c20ca553cb49874565cfd9c485/ss_7b3b6cb977fc70c20ca553cb49874565cfd9c485.1920x1080.jpg?t=1760633487" alt="Poveglia Screenshot 8" />
+                        <div class="gallery-overlay">
+                            <p>Encuentra pistas</p>
+                        </div>
+                    </div>
+                    <!-- Imagen 9 -->
+                    <div class="gallery-item">
+                        <img src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2260450/26e5ae079f413eaee70584a8be222998851ab175/ss_26e5ae079f413eaee70584a8be222998851ab175.1920x1080.jpg?t=1760633487" alt="Poveglia Screenshot 9" />
+                        <div class="gallery-overlay">
+                            <p>Escapa de la isla</p>
+                        </div>
                     </div>
                 </div>
-                <div class="gallery-item">
-                    <img src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/4037640/1f71433b5f52a2e8c9f40de572115640d891ddc1/ss_1f71433b5f52a2e8c9f40de572115640d891ddc1.1920x1080.jpg?t=1760630662" alt="Poveglia Screenshot 2" width="352" height="250" />
-                    <div class="gallery-overlay">
-                        <p>Encuentros sobrenaturales</p>
-                    </div>
+                <div class="gallery-controls">
+                    <button class="gallery-btn prev-btn">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <button class="gallery-btn next-btn">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
                 </div>
-                <div class="gallery-item">
-                    <img src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/4037640/5ae90c77c8b0d97a7b10a37fc5ddd8f388cbdcbd/ss_5ae90c77c8b0d97a7b10a37fc5ddd8f388cbdcbd.1920x1080.jpg?t=1760630662" alt="Poveglia Screenshot 3" width="352" height="250" />
-                    <div class="gallery-overlay">
-                        <p>Atmósfera opresiva</p>
-                    </div>
-                </div>
-                <div class="gallery-item">
-                    <img src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/4037640/b1bbb3c93734e58fd51f4657c5701632e87c7ab2/ss_b1bbb3c93734e58fd51f4657c5701632e87c7ab2.1920x1080.jpg?t=1760630662" alt="Poveglia Screenshot 4" width="352" height="250" />
-                    <div class="gallery-overlay">
-                        <p>Resuelve enigmas</p>
-                    </div>
+                <div class="gallery-indicators">
+                    <!-- Los indicadores se generarán dinámicamente con JavaScript -->
                 </div>
             </div>
         </div>
@@ -1036,6 +1145,12 @@
                         <a href="https://discord.com/invite/hMewakCaFa" class="social-icon" target="_blank">
                             <i class="fab fa-discord"></i>
                         </a>
+                        <a href="https://www.instagram.com/povegliaoficial/" class="social-icon" target="_blank">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="https://www.tiktok.com/@povegliaoficial" class="social-icon" target="_blank">
+                            <i class="fab fa-tiktok"></i>
+                        </a>
                     </div>
                 </div>
                 <div class="footer-column">
@@ -1052,7 +1167,9 @@
                 <div class="footer-column">
                     <h3>Contacto</h3>
                     <p>¿Tienes preguntas? Contáctanos en:</p>
-                    <p><a href="mailto:wbstudiosgames@gmail.com">wbstudiosgames@gmail.com</a></p>
+                    <p>wbstudiosgames@gmail.com</p>
+                    <p>intiproductionsgames@gmail.com</p>
+                    <p>Creative Director | Founder & CEO</p>
                 </div>
             </div>
             <div class="copyright">
@@ -1107,6 +1224,68 @@
                 }, { threshold: 0.5 });
 
                 observer.observe(section);
+            });
+
+            // Carrusel de imágenes
+            const carousel = document.querySelector('.gallery-carousel');
+            const items = document.querySelectorAll('.gallery-item');
+            const prevBtn = document.querySelector('.prev-btn');
+            const nextBtn = document.querySelector('.next-btn');
+            const indicatorsContainer = document.querySelector('.gallery-indicators');
+            
+            let currentIndex = 0;
+            const totalItems = items.length;
+            
+            // Crear indicadores
+            for (let i = 0; i < totalItems; i++) {
+                const indicator = document.createElement('div');
+                indicator.classList.add('indicator');
+                if (i === 0) indicator.classList.add('active');
+                indicator.addEventListener('click', () => goToSlide(i));
+                indicatorsContainer.appendChild(indicator);
+            }
+            
+            const indicators = document.querySelectorAll('.indicator');
+            
+            function updateCarousel() {
+                carousel.style.transform = `translateX(-${currentIndex * 100}%)`;
+                
+                // Actualizar indicadores
+                indicators.forEach((indicator, index) => {
+                    indicator.classList.toggle('active', index === currentIndex);
+                });
+            }
+            
+            function goToSlide(index) {
+                currentIndex = index;
+                updateCarousel();
+            }
+            
+            function nextSlide() {
+                currentIndex = (currentIndex + 1) % totalItems;
+                updateCarousel();
+            }
+            
+            function prevSlide() {
+                currentIndex = (currentIndex - 1 + totalItems) % totalItems;
+                updateCarousel();
+            }
+            
+            // Event listeners para botones
+            nextBtn.addEventListener('click', nextSlide);
+            prevBtn.addEventListener('click', prevSlide);
+            
+            // Auto slide cada 5 segundos
+            let slideInterval = setInterval(nextSlide, 5000);
+            
+            // Pausar auto slide al interactuar con el carrusel
+            const carouselContainer = document.querySelector('.gallery-container');
+            carouselContainer.addEventListener('mouseenter', () => {
+                clearInterval(slideInterval);
+            });
+            
+            carouselContainer.addEventListener('mouseleave', () => {
+                slideInterval = setInterval(nextSlide, 5000);
             });
         });
     </script>

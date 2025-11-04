@@ -242,19 +242,21 @@
         /* Features Section */
         .features {
             padding: 100px 0;
-            background-color: var(--secondary);
             position: relative;
             overflow: hidden;
         }
 
         .features-video-bg {
             position: absolute;
-            top: 0;
-            left: 0;
+            top: 50%;
+            left: 50%;
             width: 100%;
             height: 100%;
-            z-index: -2;
             object-fit: cover;
+            transform: translate(-50%, -50%);
+            z-index: -2;
+            min-width: 100%;
+            min-height: 100%;
         }
 
         .features-overlay {
@@ -334,19 +336,21 @@
         /* About Section */
         .about {
             padding: 100px 0;
-            background-color: var(--background);
             position: relative;
             overflow: hidden;
         }
 
         .about-video-bg {
             position: absolute;
-            top: 0;
-            left: 0;
+            top: 50%;
+            left: 50%;
             width: 100%;
             height: 100%;
-            z-index: -2;
             object-fit: cover;
+            transform: translate(-50%, -50%);
+            z-index: -2;
+            min-width: 100%;
+            min-height: 100%;
         }
 
         .about-overlay {
@@ -502,7 +506,6 @@
         /* Buy Now Section */
         .buy-now {
             padding: 100px 0;
-            background-color: var(--secondary);
             text-align: center;
             position: relative;
             overflow: hidden;
@@ -510,12 +513,15 @@
 
         .buy-now-video-bg {
             position: absolute;
-            top: 0;
-            left: 0;
+            top: 50%;
+            left: 50%;
             width: 100%;
             height: 100%;
-            z-index: -2;
             object-fit: cover;
+            transform: translate(-50%, -50%);
+            z-index: -2;
+            min-width: 100%;
+            min-height: 100%;
         }
 
         .buy-now-overlay {
@@ -798,7 +804,9 @@
     <!-- Features Section -->
     <section id="features" class="features">
         <!-- Video de fondo para Características -->
-        <iframe class="features-video-bg" src="https://www.youtube.com/embed/2QQZ_TY8ZK0?autoplay=1&mute=1&loop=1&playlist=2QQZ_TY8ZK0&controls=0&modestbranding=1&rel=0&disablekb=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        <div class="video-container">
+            <iframe class="features-video-bg" src="https://www.youtube.com/embed/2QQZ_TY8ZK0?autoplay=1&mute=1&loop=1&playlist=2QQZ_TY8ZK0&controls=0&modestbranding=1&rel=0&disablekb=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        </div>
         <div class="features-overlay"></div>
         
         <div class="container">
@@ -835,7 +843,9 @@
     <!-- About Section -->
     <section id="about" class="about">
         <!-- Video de fondo para Historia -->
-        <iframe class="about-video-bg" src="https://www.youtube.com/embed/lDRssWwoYZY?autoplay=1&mute=1&loop=1&playlist=lDRssWwoYZY&controls=0&modestbranding=1&rel=0&disablekb=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        <div class="video-container">
+            <iframe class="about-video-bg" src="https://www.youtube.com/embed/lDRssWwoYZY?autoplay=1&mute=1&loop=1&playlist=lDRssWwoYZY&controls=0&modestbranding=1&rel=0&disablekb=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        </div>
         <div class="about-overlay"></div>
         
         <div class="container">
@@ -958,7 +968,9 @@
     <!-- Buy Now Section -->
     <section id="buy-now" class="buy-now">
         <!-- Video de fondo para Comprar Ahora -->
-        <iframe class="buy-now-video-bg" src="https://www.youtube.com/embed/ObcnfR13vlE?autoplay=1&mute=1&loop=1&playlist=ObcnfR13vlE&controls=0&modestbranding=1&rel=0&disablekb=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        <div class="video-container">
+            <iframe class="buy-now-video-bg" src="https://www.youtube.com/embed/ObcnfR13vlE?autoplay=1&mute=1&loop=1&playlist=ObcnfR13vlE&controls=0&modestbranding=1&rel=0&disablekb=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        </div>
         <div class="buy-now-overlay"></div>
         
         <div class="container">
@@ -1009,8 +1021,8 @@
         <div class="container">
             <div class="footer-content">
                 <div class="footer-column">
-                    <h3>Poveglia</h3>
-                    <p>La Isla Sin Retorno es un juego de terror psicológico desarrollado por Inti Games Productions.</p>
+                    <h3>Poveglia la isla del no Retorno</h3>
+                    <p>Es un juego de terror psicológico desarrollado por Inti Games Productions.</p>
                     <div class="social-icons">
                         <a href="https://store.steampowered.com/app/2260450/Poveglia_The_Island_of_No_Return/" class="social-icon" target="_blank">
                             <i class="fab fa-steam"></i>
@@ -1072,6 +1084,29 @@
                     header.style.backgroundColor = 'rgba(10, 10, 10, 0.95)';
                     header.style.padding = '15px 0';
                 }
+            });
+
+            // Forzar la carga de videos de fondo
+            const videoSections = document.querySelectorAll('.features, .about, .buy-now');
+            
+            videoSections.forEach(section => {
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            // Cuando la sección es visible, recargar el iframe
+                            const iframe = entry.target.querySelector('iframe');
+                            if (iframe) {
+                                const src = iframe.src;
+                                iframe.src = '';
+                                setTimeout(() => {
+                                    iframe.src = src;
+                                }, 100);
+                            }
+                        }
+                    });
+                }, { threshold: 0.5 });
+
+                observer.observe(section);
             });
         });
     </script>
